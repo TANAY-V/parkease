@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — ParkEase</title>
+  <meta name="description" content="Manage your bookings and parking spaces on ParkEase.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+
+  <div class="dashboard-page">
+    <div class="container">
+      <!-- Header -->
+      <div class="dash-header">
+        <div>
+          <h1>My Dashboard</h1>
+          <p class="text-muted" id="dash-welcome">Welcome back!</p>
+        </div>
+        <div class="dash-header-actions">
+          <a href="list-space.html" class="btn btn-primary">➕ List a Space</a>
+          <a href="search.html" class="btn btn-outline">🔍 Find Parking</a>
+        </div>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="grid grid-4 stats-row" id="stats-row">
+        <div class="stat-card" id="stat-bookings">
+          <div class="stat-icon" style="background: rgba(79,142,247,0.12); color: var(--accent);">📅</div>
+          <div class="stat-value" id="sv-bookings">—</div>
+          <div class="stat-label">Total Bookings</div>
+        </div>
+        <div class="stat-card" id="stat-spaces">
+          <div class="stat-icon" style="background: rgba(139,92,246,0.12); color: var(--violet);">🅿️</div>
+          <div class="stat-value" id="sv-spaces">—</div>
+          <div class="stat-label">Listed Spaces</div>
+        </div>
+        <div class="stat-card" id="stat-earnings">
+          <div class="stat-icon" style="background: rgba(34,197,94,0.12); color: var(--success);">💰</div>
+          <div class="stat-value" id="sv-earnings">—</div>
+          <div class="stat-label">Total Earnings</div>
+        </div>
+        <div class="stat-card" id="stat-active">
+          <div class="stat-icon" style="background: rgba(245,158,11,0.12); color: var(--warning);">⭐</div>
+          <div class="stat-value" id="sv-active">—</div>
+          <div class="stat-label">Active Spaces</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="dash-tabs">
+        <button class="dash-tab active" id="dtab-bookings" onclick="switchDashTab('bookings')">📅 My Bookings</button>
+        <button class="dash-tab" id="dtab-spaces" onclick="switchDashTab('spaces')">🅿️ My Spaces</button>
+      </div>
+
+      <!-- My Bookings -->
+      <div id="tab-bookings">
+        <div class="tab-header">
+          <h2>My Bookings</h2>
+          <div class="tab-filters">
+            <select class="form-control" id="booking-filter" onchange="filterBookings()" style="width: auto;">
+              <option value="all">All Statuses</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div id="bookings-list" class="bookings-list">
+          <div style="text-align:center; padding: 3rem;"><div class="spinner"></div></div>
+        </div>
+      </div>
+
+      <!-- My Spaces -->
+      <div id="tab-spaces" class="hidden">
+        <div class="tab-header">
+          <h2>My Listed Spaces</h2>
+          <a href="list-space.html" class="btn btn-primary btn-sm">➕ Add New Space</a>
+        </div>
+        <div id="my-spaces-list" class="grid grid-auto">
+          <div style="grid-column:1/-1; text-align:center; padding: 3rem;"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

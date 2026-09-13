@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ParkEase — Find & List Parking Spaces in India</title>
+  <meta name="description" content="ParkEase is India's parking marketplace. Find affordable hourly parking near you, or earn money by listing your unused parking space.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar"></nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-badge">🇮🇳 India's #1 Parking Marketplace</div>
+      <h1>
+        Find the Perfect<br>
+        <span class="text-gradient">Parking Space</span><br>
+        Near You
+      </h1>
+      <p class="hero-subtitle">
+        Book hourly parking from ₹8/hr · No fines · Instant confirmation<br>
+        or list your unused space and start earning today
+      </p>
+
+      <!-- Search Box -->
+      <div class="hero-search" id="hero-search">
+        <div class="search-tabs">
+          <button class="search-tab active" id="tab-find" onclick="switchTab('find')">🔍 Find Parking</button>
+          <button class="search-tab" id="tab-list" onclick="switchTab('list')">📍 List Your Space</button>
+        </div>
+        <div class="search-body" id="search-find-body">
+          <div class="search-fields">
+            <div class="search-field">
+              <label>📍 City or Area</label>
+              <input type="text" id="hero-city" placeholder="e.g. Bengaluru, Mumbai, Delhi..." class="form-control">
+            </div>
+            <div class="search-field">
+              <label>🚗 Vehicle Type</label>
+              <select id="hero-vehicle" class="form-control">
+                <option value="all">Any Vehicle</option>
+                <option value="car">🚗 Car</option>
+                <option value="bike">🏍️ Bike</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-search" onclick="doSearch()" id="hero-search-btn">
+              Search Spaces →
+            </button>
+          </div>
+        </div>
+        <div class="search-body hidden" id="search-list-body">
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Have an unused driveway, garage or parking lot? Start earning today!</p>
+          <a href="list-space.html" class="btn btn-primary btn-lg">➕ List My Parking Space</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="stat-num" id="count-spaces">500+</span><span>Spaces Listed</span></div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat"><span class="stat-num">10+</span><span>Cities</span></div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat"><span class="stat-num">₹8</span><span>Starting from/hr</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Simple & Fast</div>
+        <h2>How ParkEase Works</h2>
+        <p class="section-subtitle">Three steps to stress-free parking</p>
+      </div>
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-icon" style="background: rgba(79,142,247,0.12); color: var(--accent);">🔍</div>
+          <div class="how-step">01</div>
+          <h3>Search</h3>
+          <p>Enter your city or area to find nearby parking spaces with real-time availability.</p>
+        </div>
+        <div class="how-connector"></div>
+        <div class="how-card">
+          <div class="how-icon" style="background: rgba(139,92,246,0.12); color: var(--violet);">📅</div>
+          <div class="how-step">02</div>
+          <h3>Book</h3>
+          <p>Choose your time slot, enter your vehicle number, and confirm your booking instantly.</p>
+        </div>
+        <div class="how-connector"></div>
+        <div class="how-card">
+          <div class="how-icon" style="background: rgba(34,197,94,0.12); color: var(--success);">🅿️</div>
+          <div class="how-step">03</div>
+          <h3>Park</h3>
+          <p>Park hassle-free. No fines, no stress. Show your confirmation to the space owner.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Spaces -->
+  <section class="section featured-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Top Listings</div>
+        <h2>Featured Parking Spaces</h2>
+        <p class="section-subtitle">Handpicked spaces across top Indian cities</p>
+      </div>
+      <div class="grid grid-auto" id="featured-grid">
+        <!-- Loaded dynamically -->
+        <div class="space-card-skeleton skeleton" style="height:320px; border-radius: var(--radius-lg);"></div>
+        <div class="space-card-skeleton skeleton" style="height:320px; border-radius: var(--radius-lg);"></div>
+        <div class="space-card-skeleton skeleton" style="height:320px; border-radius: var(--radius-lg);"></div>
+      </div>
+      <div style="text-align:center; margin-top: 2.5rem;">
+        <a href="search.html" class="btn btn-outline btn-lg">View All Spaces →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- For Space Owners -->
+  <section class="section earn-section">
+    <div class="container">
+      <div class="earn-grid">
+        <div class="earn-content">
+          <div class="section-eyebrow">For Space Owners</div>
+          <h2>Turn Your Parking Into <span class="text-gradient">Passive Income</span></h2>
+          <p>Have a driveway, garage, or unused parking spot? List it on ParkEase and earn money every hour someone parks there.</p>
+          <ul class="earn-benefits">
+            <li><span class="benefit-icon">💰</span> You set your own hourly price</li>
+            <li><span class="benefit-icon">📲</span> Instant booking notifications</li>
+            <li><span class="benefit-icon">🛡️</span> Secure, verified bookings only</li>
+            <li><span class="benefit-icon">📊</span> Track your earnings on dashboard</li>
+          </ul>
+          <a href="list-space.html" class="btn btn-primary btn-lg">Start Earning Today →</a>
+        </div>
+        <div class="earn-visual">
+          <div class="earn-card card-glass">
+            <div class="earn-card-header">
+              <span class="tag tag-success">● Active</span>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">Your Space</span>
+            </div>
+            <h3 style="font-size: 1.1rem; margin: 0.75rem 0 0.25rem;">Covered Parking — MG Road</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Bengaluru · 3 spots</p>
+            <div class="earn-meter">
+              <div class="earn-meter-bar"></div>
+              <span>2/3 spots booked today</span>
+            </div>
+            <div class="earn-today">
+              <span style="color: var(--text-secondary); font-size: 0.85rem;">Today's Earnings</span>
+              <span class="text-gradient" style="font-size: 1.5rem; font-weight: 700;">₹840</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cities -->
+  <section class="section" id="cities-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Pan India</div>
+        <h2>Available Cities</h2>
+      </div>
+      <div class="cities-grid">
+        <a href="search.html?city=Bengaluru" class="city-chip">🏙️ Bengaluru</a>
+        <a href="search.html?city=Mumbai" class="city-chip">🌆 Mumbai</a>
+        <a href="search.html?city=New Delhi" class="city-chip">🏛️ New Delhi</a>
+        <a href="search.html?city=Hyderabad" class="city-chip">💎 Hyderabad</a>
+        <a href="search.html?city=Chennai" class="city-chip">🌊 Chennai</a>
+        <a href="search.html?city=Pune" class="city-chip">🏫 Pune</a>
+        <a href="search.html?city=Kolkata" class="city-chip">🎨 Kolkata</a>
+        <a href="search.html?city=Ahmedabad" class="city-chip">🦁 Ahmedabad</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="navbar-brand">
+            <div class="logo-icon">🅿️</div>
+            <span class="text-gradient">ParkEase</span>
+          </div>
+          <p>India's trusted parking marketplace. Find, book, and manage parking spaces effortlessly.</p>
+        </div>
+        <div>
+          <h4>Find Parking</h4>
+          <ul>
+            <li><a href="search.html">Browse Spaces</a></li>
+            <li><a href="search.html?vehicle_type=car">Car Parking</a></li>
+            <li><a href="search.html?vehicle_type=bike">Bike Parking</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Space Owners</h4>
+          <ul>
+            <li><a href="list-space.html">List Your Space</a></li>
+            <li><a href="dashboard.html">Owner Dashboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Account</h4>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="login.html?tab=register">Sign Up</a></li>
+            <li><a href="dashboard.html">My Bookings</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 ParkEase. All rights reserved.</span>
+        <span>Made with ❤️ for Indian drivers</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

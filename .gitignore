@@ -1,0 +1,23 @@
+# Dependencies
+back end/node_modules/
+front end/node_modules/
+
+# Database (auto-created on server)
+back end/parkease.db
+back end/parkease.db-shm
+back end/parkease.db-wal
+
+# Uploads
+back end/uploads/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db

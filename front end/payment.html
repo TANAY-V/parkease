@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment — ParkEase</title>
+  <meta name="description" content="Complete your parking space booking payment on ParkEase.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/payment.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+
+  <div class="payment-page">
+    <div class="container payment-container">
+      <!-- Loading -->
+      <div id="payment-loading" class="text-center" style="padding-top: 4rem;">
+        <div class="spinner" style="margin-bottom: 1rem;"></div>
+        <p class="text-muted">Loading booking details...</p>
+      </div>
+
+      <!-- Content -->
+      <div id="payment-content" class="hidden">
+        <div class="payment-layout">
+          <!-- Left: Payment Form -->
+          <div class="payment-form-section">
+            <div class="breadcrumb" style="margin-bottom: 1.5rem;">
+              <a href="search.html">Search</a>
+              <span class="sep">›</span>
+              <a id="back-to-space" href="#">Space Details</a>
+              <span class="sep">›</span>
+              <span>Payment</span>
+            </div>
+            <h1>Complete Your Booking</h1>
+            <p class="text-muted" style="margin: 0.5rem 0 2rem;">Secure payment powered by ParkEase</p>
+
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+              <div class="payment-method active" onclick="selectMethod(this, 'upi')" id="method-upi">
+                <div class="method-radio"></div>
+                <div class="method-icon">📱</div>
+                <div>
+                  <div class="method-name">UPI Payment</div>
+                  <div class="method-desc">PhonePe, GPay, Paytm, BHIM</div>
+                </div>
+              </div>
+              <div class="payment-method" onclick="selectMethod(this, 'card')" id="method-card">
+                <div class="method-radio"></div>
+                <div class="method-icon">💳</div>
+                <div>
+                  <div class="method-name">Debit / Credit Card</div>
+                  <div class="method-desc">Visa, Mastercard, RuPay</div>
+                </div>
+              </div>
+              <div class="payment-method" onclick="selectMethod(this, 'netbanking')" id="method-netbanking">
+                <div class="method-radio"></div>
+                <div class="method-icon">🏦</div>
+                <div>
+                  <div class="method-name">Net Banking</div>
+                  <div class="method-desc">All major Indian banks</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- UPI Form -->
+            <div class="payment-sub-form" id="form-upi">
+              <div class="form-group">
+                <label class="form-label">UPI ID</label>
+                <div class="input-icon">
+                  <span class="icon">@</span>
+                  <input type="text" class="form-control" id="upi-id" placeholder="yourname@upi">
+                </div>
+                <span class="form-hint">Enter your UPI ID (e.g. 9876543210@paytm)</span>
+              </div>
+            </div>
+
+            <!-- Card Form -->
+            <div class="payment-sub-form hidden" id="form-card">
+              <div class="form-group">
+                <label class="form-label">Card Number</label>
+                <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                  <label class="form-label">Expiry</label>
+                  <input type="text" class="form-control" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">CVV</label>
+                  <input type="password" class="form-control" placeholder="•••" maxlength="3">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cardholder Name</label>
+                <input type="text" class="form-control" placeholder="Name on card">
+              </div>
+            </div>
+
+            <!-- Net Banking Form -->
+            <div class="payment-sub-form hidden" id="form-netbanking">
+              <div class="form-group">
+                <label class="form-label">Select Bank</label>
+                <select class="form-control">
+                  <option>State Bank of India</option>
+                  <option>HDFC Bank</option>
+                  <option>ICICI Bank</option>
+                  <option>Axis Bank</option>
+                  <option>Kotak Mahindra Bank</option>
+                  <option>Punjab National Bank</option>
+                  <option>Bank of Baroda</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 1rem;">
+              ℹ️ This is a <strong>demo payment</strong>. No real money will be charged. Click "Pay Now" to simulate a successful payment.
+            </div>
+
+            <button class="btn btn-primary btn-full btn-lg pay-btn" onclick="processPayment()" id="pay-now-btn" style="margin-top: 1.5rem;">
+              🔒 Pay <span id="pay-amount">₹0</span> Now
+            </button>
+
+            <div class="secure-badges">
+              <span>🔒 SSL Secured</span>
+              <span>🏦 RBI Compliant</span>
+              <span>✅ PCI DSS</span>
+            </div>
+          </div>
+
+          <!-- Right: Order Summary -->
+          <div class="order-summary card">
+            <h3>Booking Summary</h3>
+            <div class="divider"></div>
+
+            <div class="summary-space" id="summary-space">
+              <img id="summary-img" src="" alt="" class="summary-img">
+              <div>
+                <div id="summary-title" class="summary-title"></div>
+                <div id="summary-address" class="summary-address"></div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="summary-rows" id="summary-rows"></div>
+
+            <div class="divider"></div>
+            <div class="summary-total">
+              <span>Total Amount</span>
+              <span id="summary-total-val" class="total-val"></span>
+            </div>
+
+            <div class="booking-id-block" id="booking-id-block">
+              Booking ID: <strong id="booking-id-display"></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success State -->
+      <div id="payment-success" class="hidden payment-success-page">
+        <div class="success-icon">✅</div>
+        <h1 class="text-gradient">Payment Successful!</h1>
+        <p class="text-muted">Your parking space is confirmed. See you there!</p>
+        <div class="success-card card" id="success-details"></div>
+        <div class="success-actions">
+          <a href="dashboard.html" class="btn btn-primary btn-lg">📋 View My Bookings</a>
+          <a href="search.html" class="btn btn-outline btn-lg">🔍 Book Another</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/payment.js"></script>
+</body>
+</html>
