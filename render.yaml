@@ -2,7 +2,7 @@ services:
   - type: web
     name: parkease-api
     runtime: node
-    rootDir: back end
+    rootDir: backend
     buildCommand: npm install
     startCommand: node server.js
     envVars:
