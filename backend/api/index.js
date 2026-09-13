@@ -5,6 +5,18 @@ const { initDB } = require('../db');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ─── DB Init (runs once per cold start) ──────────────────────────────────────
+let dbReady = false;
+let dbInitPromise = null;
+
+async function ensureDB() {
+  if (dbReady) return;
+  if (!dbInitPromise) {
+    dbInitPromise = initDB().then(() => { dbReady = true; });
+  }
+  await dbInitPromise;
+}
+
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(cors({
   origin: '*',
@@ -13,6 +25,17 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Ensure DB is ready before any route
+app.use(async (req, res, next) => {
+  try {
+    await ensureDB();
+    next();
+  } catch (err) {
+    console.error('DB init failed:', err);
+    res.status(500).json({ error: 'Database initialization failed.' });
+  }
+});
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/auth', require('../routes/auth'));
@@ -41,21 +64,16 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error.' });
 });
 
-// ─── Start ────────────────────────────────────────────────────────────────────
-async function start() {
-  try {
-    await initDB();
+// ─── Local dev start ──────────────────────────────────────────────────────────
+if (require.main === module) {
+  ensureDB().then(() => {
     app.listen(PORT, () => {
       console.log(`🅿️  ParkEase API running on port ${PORT}`);
     });
-  } catch (err) {
+  }).catch(err => {
     console.error('Failed to start:', err);
     process.exit(1);
-  }
-}
-
-if (require.main === module) {
-  start();
+  });
 }
 
 module.exports = app;
