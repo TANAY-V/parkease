@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Register — ParkEase</title>
+  <meta name="description" content="Sign in or create your ParkEase account to book and list parking spaces.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+
+  <div class="auth-page">
+    <div class="auth-bg">
+      <div class="hero-orb hero-orb-1" style="opacity:0.15;"></div>
+      <div class="hero-orb hero-orb-2" style="opacity:0.1;"></div>
+    </div>
+
+    <div class="auth-card card-glass">
+      <!-- Brand -->
+      <div class="auth-brand">
+        <div class="logo-icon" style="width:48px; height:48px; font-size: 1.5rem;">🅿️</div>
+        <h1 class="text-gradient">ParkEase</h1>
+      </div>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="showTab('login')">Login</button>
+        <button class="auth-tab" id="tab-register" onclick="showTab('register')">Create Account</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email Address <span class="required">*</span></label>
+          <div class="input-icon">
+            <span class="icon">✉️</span>
+            <input type="email" id="login-email" class="form-control" placeholder="your@email.com" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password <span class="required">*</span></label>
+          <div class="input-icon">
+            <span class="icon">🔒</span>
+            <input type="password" id="login-password" class="form-control" placeholder="Your password" required minlength="6">
+          </div>
+        </div>
+        <div id="login-error" class="alert alert-danger hidden"></div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg" id="login-btn">Sign In →</button>
+        <div class="auth-divider"><span>or</span></div>
+        <p class="auth-switch">Don't have an account? <a href="#" onclick="showTab('register')">Sign up free</a></p>
+        <div class="demo-hint">
+          <strong>Demo credentials:</strong><br>
+          Email: <code>rajesh@example.com</code> · Password: <code>password123</code>
+        </div>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="hidden" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label class="form-label">Full Name <span class="required">*</span></label>
+          <div class="input-icon">
+            <span class="icon">👤</span>
+            <input type="text" id="reg-name" class="form-control" placeholder="Your full name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address <span class="required">*</span></label>
+          <div class="input-icon">
+            <span class="icon">✉️</span>
+            <input type="email" id="reg-email" class="form-control" placeholder="your@email.com" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <div class="input-icon">
+            <span class="icon">📱</span>
+            <input type="tel" id="reg-phone" class="form-control" placeholder="10-digit mobile number" maxlength="10">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password <span class="required">*</span></label>
+          <div class="input-icon">
+            <span class="icon">🔒</span>
+            <input type="password" id="reg-password" class="form-control" placeholder="Min. 6 characters" required minlength="6">
+          </div>
+        </div>
+        <div id="reg-error" class="alert alert-danger hidden"></div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg" id="reg-btn">Create Account →</button>
+        <div class="auth-divider"><span>or</span></div>
+        <p class="auth-switch">Already have an account? <a href="#" onclick="showTab('login')">Sign in</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+/* ─── Dashboard Styles ───────────────────────────────────────────────────────── */
+
+.dashboard-page { min-height: 100vh; padding: 7rem 0 4rem; }
+.dash-header {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+  margin-bottom: 2rem; flex-wrap: wrap;
+}
+.dash-header h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+.dash-header-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.stats-row { margin-bottom: 2.5rem; }
+
+/* ─── Dashboard Tabs ─────────────────────────────────────────────────────────── */
+.dash-tabs {
+  display: flex; gap: 0.25rem;
+  border-bottom: 1px solid var(--border); margin-bottom: 2rem;
+}
+.dash-tab {
+  padding: 0.7rem 1.25rem; background: none;
+  font-size: 0.9rem; font-weight: 600; color: var(--text-muted);
+  border-bottom: 2px solid transparent; cursor: pointer;
+  transition: var(--transition);
+}
+.dash-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.dash-tab:hover { color: var(--text-primary); }
+.tab-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.tab-header h2 { font-size: 1.25rem; }
+.tab-filters { display: flex; gap: 0.5rem; }
+
+/* ─── Booking Cards ──────────────────────────────────────────────────────────── */
+.bookings-list { display: flex; flex-direction: column; gap: 1rem; }
+.booking-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 1.5rem;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem;
+  align-items: center; transition: var(--transition);
+}
+.booking-card:hover { border-color: var(--border-hover); }
+.booking-img { width: 80px; height: 80px; border-radius: var(--radius-md); object-fit: cover; }
+.booking-info { display: flex; flex-direction: column; gap: 0.4rem; }
+.booking-title { font-weight: 600; font-size: 1rem; }
+.booking-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.82rem; color: var(--text-secondary); }
+.booking-meta .sep { color: var(--text-muted); }
+.booking-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.booking-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
+.booking-amount { font-size: 1.25rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+
+/* ─── My Space Cards ─────────────────────────────────────────────────────────── */
+.my-space-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition);
+}
+.my-space-card:hover { border-color: var(--border-hover); }
+.my-space-img { width: 100%; height: 160px; object-fit: cover; }
+.my-space-body { padding: 1.25rem; }
+.my-space-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem; }
+.my-space-title { font-weight: 600; font-size: 0.95rem; }
+.my-space-price { color: var(--accent); font-weight: 700; }
+.my-space-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.75rem 0; }
+.mss-item { background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem; }
+.mss-val { font-weight: 700; font-size: 1rem; }
+.mss-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.1rem; }
+.my-space-actions { display: flex; gap: 0.5rem; }
+.toggle-active { font-size: 0.78rem; }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .booking-card { grid-template-columns: 1fr; }
+  .booking-img { display: none; }
+  .booking-actions { flex-direction: row; align-items: center; flex-wrap: wrap; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}

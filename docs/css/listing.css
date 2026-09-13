@@ -1,0 +1,80 @@
+/* ─── Listing Page Styles ────────────────────────────────────────────────────── */
+
+.listing-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 2rem;
+  padding: 2rem 0 4rem;
+  align-items: start;
+}
+
+/* ─── Image ──────────────────────────────────────────────────────────────────── */
+.listing-image-wrap { position: relative; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 1.5rem; }
+.listing-img { width: 100%; height: 380px; object-fit: cover; }
+.listing-img-overlay { position: absolute; top: 1rem; left: 1rem; display: flex; gap: 0.5rem; }
+
+/* ─── Info Card ──────────────────────────────────────────────────────────────── */
+.listing-info { padding: 1.75rem; }
+.listing-header { display: flex; justify-content: space-between; gap: 1.5rem; align-items: flex-start; margin-bottom: 1rem; }
+.listing-header h1 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+.listing-address { display: flex; align-items: center; gap: 0.4rem; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem; }
+.listing-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.listing-price-block { text-align: right; flex-shrink: 0; }
+.listing-price { font-size: 2rem; font-weight: 800; font-family: var(--font-display); color: var(--accent); }
+.listing-per { font-size: 0.78rem; color: var(--text-muted); }
+.listing-rating { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.listing-description { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; }
+
+/* ─── Booking Widget ─────────────────────────────────────────────────────────── */
+.listing-sidebar { position: sticky; top: 80px; }
+.booking-widget { padding: 1.75rem; }
+.booking-widget h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.booking-price-display { font-size: 1.75rem; font-weight: 700; color: var(--accent); margin-bottom: 1.25rem; }
+.booking-price-display span { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; }
+#booking-form { display: flex; flex-direction: column; gap: 1rem; }
+
+/* ─── Breakdown ──────────────────────────────────────────────────────────────── */
+.booking-breakdown {
+  background: rgba(79,142,247,0.06); border: 1px solid rgba(79,142,247,0.15);
+  border-radius: var(--radius-md); padding: 1rem;
+}
+.booking-breakdown.hidden { display: none; }
+.breakdown-row { display: flex; justify-content: space-between; font-size: 0.875rem; padding: 0.2rem 0; color: var(--text-secondary); }
+.breakdown-row.total { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+
+.booking-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem; }
+.booking-features { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+.bk-feature { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-secondary); }
+
+/* ─── Owner Card ─────────────────────────────────────────────────────────────── */
+.owner-card { padding: 1.25rem; display: flex; align-items: center; gap: 1rem; margin-top: 1rem; }
+.owner-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--violet));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 700; color: white; flex-shrink: 0;
+}
+
+/* ─── Reviews ────────────────────────────────────────────────────────────────── */
+.review-item { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+.review-item:last-child { border-bottom: none; }
+.review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; }
+.review-user { display: flex; align-items: center; gap: 0.5rem; }
+.review-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: white;
+}
+.review-name { font-weight: 600; font-size: 0.875rem; }
+.review-date { font-size: 0.78rem; color: var(--text-muted); }
+.review-stars { color: var(--warning); font-size: 0.9rem; margin-bottom: 0.4rem; }
+.review-comment { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .listing-layout { grid-template-columns: 1fr; }
+  .listing-sidebar { position: static; }
+  .listing-img { height: 240px; }
+  .listing-header { flex-direction: column; }
+}

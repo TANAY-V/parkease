@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Parking Spaces — ParkEase</title>
+  <meta name="description" content="Search and filter available parking spaces by city, vehicle type, and price across India.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+
+  <div class="search-layout">
+    <!-- Sidebar Filters -->
+    <aside class="search-sidebar" id="search-sidebar">
+      <div class="sidebar-header">
+        <h3>Filters</h3>
+        <button class="btn btn-ghost btn-sm" onclick="clearFilters()" id="clear-filters-btn">Clear All</button>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">🔍 Search</label>
+        <div class="input-icon">
+          <span class="icon">🔍</span>
+          <input type="text" id="filter-search" class="form-control" placeholder="Title, address...">
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">📍 City</label>
+        <input type="text" id="filter-city" class="form-control" placeholder="e.g. Bengaluru">
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">🚗 Vehicle Type</label>
+        <div class="filter-chips" id="vehicle-filter">
+          <button class="filter-chip active" data-value="all" onclick="setVehicleFilter(this)">All</button>
+          <button class="filter-chip" data-value="car" onclick="setVehicleFilter(this)">🚗 Car</button>
+          <button class="filter-chip" data-value="bike" onclick="setVehicleFilter(this)">🏍️ Bike</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">💰 Price Range (₹/hr)</label>
+        <div class="price-range">
+          <div class="form-group">
+            <label class="form-label">Min</label>
+            <input type="number" id="filter-min-price" class="form-control" placeholder="0" min="0">
+          </div>
+          <span class="price-sep">—</span>
+          <div class="form-group">
+            <label class="form-label">Max</label>
+            <input type="number" id="filter-max-price" class="form-control" placeholder="Any" min="0">
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-full" onclick="applyFilters()" id="apply-filters-btn" style="margin-top: 0.5rem;">
+        Apply Filters
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="search-main">
+      <div class="search-topbar">
+        <div>
+          <h1 class="search-title">Parking Spaces</h1>
+          <p class="search-count" id="search-count">Loading...</p>
+        </div>
+        <div class="search-controls">
+          <select class="form-control" id="sort-select" onchange="applyFilters()" style="width: auto;">
+            <option value="newest">Newest First</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+          <button class="btn btn-ghost btn-sm sidebar-toggle" onclick="toggleSidebar()" id="sidebar-toggle-btn">
+            ⚙️ Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Filters Display -->
+      <div class="active-filters" id="active-filters"></div>
+
+      <!-- Results Grid -->
+      <div class="grid grid-auto" id="spaces-grid">
+        <!-- Loading skeletons -->
+        ${Array(6).fill(`<div class="skeleton" style="height:320px; border-radius: var(--radius-lg);"></div>`).join('')}
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state hidden" id="empty-state">
+        <div class="empty-icon">🅿️</div>
+        <h3>No parking spaces found</h3>
+        <p>Try adjusting your filters or search in a different city.</p>
+        <button class="btn btn-outline" onclick="clearFilters()">Clear Filters</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

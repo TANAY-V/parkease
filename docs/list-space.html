@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List Your Parking Space — ParkEase</title>
+  <meta name="description" content="List your unused parking space on ParkEase and start earning money hourly.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/list-space.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+
+  <div class="list-page">
+    <div class="container list-container">
+
+      <!-- Left: Form -->
+      <div class="list-form-section">
+        <div class="breadcrumb" style="margin-bottom: 1.5rem;">
+          <a href="dashboard.html">← Dashboard</a>
+        </div>
+        <h1 id="page-title">List Your Parking Space</h1>
+        <p class="text-muted" style="margin: 0.5rem 0 2rem;">Fill in the details below to list your space and start earning.</p>
+
+        <form id="list-space-form" onsubmit="handleSubmit(event)" novalidate>
+
+          <!-- Step 1: Basic Info -->
+          <div class="form-section">
+            <div class="form-section-header">
+              <div class="form-section-num">1</div>
+              <div>
+                <h3>Basic Information</h3>
+                <p class="text-muted text-sm">Name and describe your parking space</p>
+              </div>
+            </div>
+            <div class="form-section-body">
+              <div class="form-group">
+                <label class="form-label">Listing Title <span class="required">*</span></label>
+                <input type="text" id="f-title" class="form-control" placeholder="e.g. Covered Parking near MG Road" maxlength="100" required>
+                <span class="form-hint">Make it descriptive and specific to your location</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea id="f-description" class="form-control" rows="4"
+                  placeholder="Describe your space: security features, nearby landmarks, access instructions, shade, CCTV..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Location -->
+          <div class="form-section">
+            <div class="form-section-header">
+              <div class="form-section-num">2</div>
+              <div>
+                <h3>Location</h3>
+                <p class="text-muted text-sm">Where is your parking space?</p>
+              </div>
+            </div>
+            <div class="form-section-body">
+              <div class="form-group">
+                <label class="form-label">Full Address <span class="required">*</span></label>
+                <div class="input-icon">
+                  <span class="icon">📍</span>
+                  <input type="text" id="f-address" class="form-control" placeholder="Building/Street name, Area..." required>
+                </div>
+              </div>
+              <div class="grid grid-2" style="gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">City <span class="required">*</span></label>
+                  <input type="text" id="f-city" class="form-control" placeholder="e.g. Bengaluru" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">State</label>
+                  <select id="f-state" class="form-control">
+                    <option value="">Select state</option>
+                    <option>Andhra Pradesh</option><option>Arunachal Pradesh</option>
+                    <option>Assam</option><option>Bihar</option><option>Chhattisgarh</option>
+                    <option>Delhi</option><option>Goa</option><option>Gujarat</option>
+                    <option>Haryana</option><option>Himachal Pradesh</option>
+                    <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+                    <option>Madhya Pradesh</option><option>Maharashtra</option>
+                    <option>Manipur</option><option>Meghalaya</option><option>Mizoram</option>
+                    <option>Nagaland</option><option>Odisha</option><option>Punjab</option>
+                    <option>Rajasthan</option><option>Sikkim</option>
+                    <option>Tamil Nadu</option><option>Telangana</option><option>Tripura</option>
+                    <option>Uttar Pradesh</option><option>Uttarakhand</option>
+                    <option>West Bengal</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-2" style="gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">Latitude <span class="text-muted text-xs">(optional)</span></label>
+                  <input type="number" id="f-lat" class="form-control" placeholder="e.g. 12.9716" step="any">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Longitude <span class="text-muted text-xs">(optional)</span></label>
+                  <input type="number" id="f-lng" class="form-control" placeholder="e.g. 77.5946" step="any">
+                </div>
+              </div>
+              <div class="alert alert-info" style="margin-top:0.5rem; font-size:0.8rem;">
+                💡 <strong>Tip:</strong> Open Google Maps, right-click your exact location and copy the coordinates to help customers find you easily.
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Space Details -->
+          <div class="form-section">
+            <div class="form-section-header">
+              <div class="form-section-num">3</div>
+              <div>
+                <h3>Space Details</h3>
+                <p class="text-muted text-sm">Vehicle type, availability and capacity</p>
+              </div>
+            </div>
+            <div class="form-section-body">
+              <div class="form-group">
+                <label class="form-label">Vehicle Type Accepted <span class="required">*</span></label>
+                <div class="vehicle-choice">
+                  <label class="vehicle-option" id="vo-car">
+                    <input type="radio" name="vehicle_type" value="car" id="vt-car">
+                    <div class="vehicle-option-inner">
+                      <span class="vehicle-emoji">🚗</span>
+                      <span>Car Only</span>
+                    </div>
+                  </label>
+                  <label class="vehicle-option" id="vo-bike">
+                    <input type="radio" name="vehicle_type" value="bike" id="vt-bike">
+                    <div class="vehicle-option-inner">
+                      <span class="vehicle-emoji">🏍️</span>
+                      <span>Bike Only</span>
+                    </div>
+                  </label>
+                  <label class="vehicle-option" id="vo-both">
+                    <input type="radio" name="vehicle_type" value="both" id="vt-both" checked>
+                    <div class="vehicle-option-inner">
+                      <span class="vehicle-emoji">🚗🏍️</span>
+                      <span>Both</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="grid grid-2" style="gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">Total Spots <span class="required">*</span></label>
+                  <input type="number" id="f-spots" class="form-control" value="1" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Price per Hour (₹) <span class="required">*</span></label>
+                  <div class="input-icon">
+                    <span class="icon">₹</span>
+                    <input type="number" id="f-price" class="form-control" placeholder="e.g. 20" min="1" step="1" required>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-2" style="gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">Available From</label>
+                  <input type="time" id="f-from" class="form-control" value="00:00">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Available To</label>
+                  <input type="time" id="f-to" class="form-control" value="23:59">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Photo -->
+          <div class="form-section">
+            <div class="form-section-header">
+              <div class="form-section-num">4</div>
+              <div>
+                <h3>Photo</h3>
+                <p class="text-muted text-sm">A photo greatly increases bookings</p>
+              </div>
+            </div>
+            <div class="form-section-body">
+              <div class="form-group">
+                <label class="form-label">Image URL</label>
+                <div class="input-icon">
+                  <span class="icon">🔗</span>
+                  <input type="url" id="f-image" class="form-control"
+                         placeholder="https://... (direct image link)"
+                         oninput="previewImage(this.value)">
+                </div>
+                <span class="form-hint">Paste a direct link to a photo of your space (e.g. from Google Photos, Unsplash)</span>
+              </div>
+              <div class="image-preview-wrap" id="image-preview-wrap" style="display:none;">
+                <img id="image-preview" src="" alt="Preview" class="image-preview">
+                <button type="button" class="preview-remove" onclick="clearImage()">✕</button>
+              </div>
+              <div class="photo-suggestions">
+                <p class="text-sm text-muted" style="margin-bottom:0.5rem;">Or use a sample image:</p>
+                <div class="sample-images">
+                  <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=200" onclick="useSampleImage(this.src.replace('w=200','w=800'))" class="sample-img" title="Use this image">
+                  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200" onclick="useSampleImage(this.src.replace('w=200','w=800'))" class="sample-img" title="Use this image">
+                  <img src="https://images.unsplash.com/photo-1470224114660-3f6686c562eb?w=200" onclick="useSampleImage(this.src.replace('w=200','w=800'))" class="sample-img" title="Use this image">
+                  <img src="https://images.unsplash.com/photo-1573348722427-f1d6819fdf98?w=200" onclick="useSampleImage(this.src.replace('w=200','w=800'))" class="sample-img" title="Use this image">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Error & Submit -->
+          <div id="form-error" class="alert alert-danger hidden"></div>
+          <div class="form-actions">
+            <a href="dashboard.html" class="btn btn-outline btn-lg">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+              🅿️ <span id="submit-label">Publish Listing</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right: Preview -->
+      <div class="list-preview-section">
+        <div class="preview-label">Live Preview</div>
+        <div class="space-card preview-card" id="preview-card">
+          <img class="space-card-img" id="preview-img"
+               src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=600"
+               alt="Preview">
+          <div class="space-card-body">
+            <div class="space-card-header">
+              <h3 class="space-card-title" id="preview-title">Your Space Title</h3>
+              <div class="space-card-price" id="preview-price">₹0<span>/hr</span></div>
+            </div>
+            <div class="space-card-address">📍 <span id="preview-address">Address, City</span></div>
+            <div class="space-card-tags">
+              <span class="tag tag-accent" id="preview-vehicle">🚗🏍️ Car & Bike</span>
+              <span class="tag" id="preview-spots">1 spot</span>
+              <span class="tag" id="preview-hours">00:00 – 23:59</span>
+            </div>
+            <div class="space-card-footer">
+              <div class="space-rating">★ New</div>
+              <span class="btn btn-sm btn-outline">Book Now →</span>
+            </div>
+          </div>
+        </div>
+        <div class="preview-tips">
+          <h4>💡 Tips for more bookings</h4>
+          <ul>
+            <li>Add a clear photo of your actual space</li>
+            <li>Mention nearby landmarks in the title</li>
+            <li>List security features (CCTV, gated, covered)</li>
+            <li>Set competitive pricing vs nearby spaces</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/list-space.js"></script>
+</body>
+</html>
