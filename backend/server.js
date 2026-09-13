@@ -17,6 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 // Serve uploaded images statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// ─── Initialize Database ──────────────────────────────────────────────────────
+require('./db');
+
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/spaces', require('./routes/spaces'));
@@ -39,22 +42,15 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error.' });
 });
 
-// ─── Initialize DB then Start Server ─────────────────────────────────────────
-const { getDb } = require('./db');
-
-getDb().then(() => {
-  app.listen(PORT, () => {
-    console.log(`
+// ─── Start Server ─────────────────────────────────────────────────────────────
+app.listen(PORT, () => {
+  console.log(`
   ╔══════════════════════════════════════╗
   ║   🅿️  ParkEase API Server Running    ║
   ║   Port: ${PORT}                         ║
   ║   http://localhost:${PORT}              ║
   ╚══════════════════════════════════════╝
-    `);
-  });
-}).catch(err => {
-  console.error('Failed to initialize database:', err);
-  process.exit(1);
+  `);
 });
 
 module.exports = app;
